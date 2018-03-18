@@ -1,0 +1,30 @@
+version: '3'
+services:
+    api:
+        image: payara/micro
+        container_name: api
+        volumes:
+            - "./target:/opt/payara/deployments"
+        ports:
+            - "8080:8080"
+        command: java -jar /opt/payara/payara-micro.jar --deploymentDir /opt/payara/deployments
+        restart: always
+        env_file:
+            - ".env"
+        depends_on:
+            - mysqldb
+    mysqldb:
+        image: mysql:5.7
+        container_name: ${MYSQL_HOST}
+        restart: always
+        env_file:
+            - ".env"
+        environment:
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        ports:
+            - "3306:3306"
+        volumes:
+            - "./data/db/mysql:/var/lib/mysql"
