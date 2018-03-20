@@ -5,19 +5,15 @@ storeApp.config(['$logProvider', function ($logProvider) {
     $logProvider.debugEnabled(false); // Debug false
 }]);
 
-storeApp.config(function($stateProvider) {
-    var helloState = {
-      name: 'hello',
-      url: '/hello',
-      template: '<h3>hello world!</h3>'
-    }
-  
-    var aboutState = {
-      name: 'about',
-      url: '/about',
-      template: '<h3>Its the UI-Router hello world app!</h3>'
-    }
-  
-    $stateProvider.state(helloState);
-    $stateProvider.state(aboutState);
-});
+storeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    $stateProvider.state( {
+      name         : 'articles',
+      url          : '/articles',
+      templateUrl  : 'app/views/articles.html',
+      controller   : 'StoreController',
+      controllerAs : 'storeCtrl'
+    });
+
+    // Route par défaut : Ecran de Recherche
+    $urlRouterProvider.otherwise('/articles');
+}]);

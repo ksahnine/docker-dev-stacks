@@ -8,17 +8,35 @@ module.exports = function(grunt) {
         },
         copy: {
             main: {
-                files: [ {
-                    expand: true,
-                    cwd: 'src/app/',
-                    src: ['**', '!**/*.js', '!controllers/**', '!services/**', '!vendor/**', '!**/*.css'],
+                files: [{
+                    expand: true,
+                    cwd: 'src/app/',
+                    src: ['**', '!**/*.js', '!controllers/**', '!services/**', '!vendor/**', '!**/*.css'],
                     dest: 'dist/'
                 }, {
-                    expand: true,
-                    cwd: 'vendor/bootstrap/dist/',
-                    src: ['fonts/*.*'],
+                    expand: true,
+                    cwd: 'vendor/bootstrap/dist/',
+                    src: ['fonts/*.*'],
                     dest: 'dist/'
-                } ]
+                }, {
+                    expand: true,
+                    cwd: 'src',
+                    src: ['app/views/**'],
+                    dest: 'dist/'
+                }, {
+                    expand: true,
+                    cwd: 'src',
+                    src: ['js/*.*'],
+                    dest: 'dist/'
+                }]
+            },
+            html: {
+                files: [{
+                    expand: true,
+                    cwd: 'src',
+                    src: ['app/views/**'],
+                    dest: 'dist/'
+                }]
             }
         },
         useminPrepare: {
@@ -50,10 +68,35 @@ module.exports = function(grunt) {
         },
         watch: {
             scripts: {
-                files: [ 'src/**/*.js', 'src/**/*.html' ],
-                tasks: [ 'all' ],
+                files: ['src/**/*.js', 'src/**/*.css'],
+                tasks: ['build'],
                 options: {
-                    spawn: false,
+                    livereload: true
+                }
+            },
+            html: {
+                files: ['src/**/*.html'],
+                tasks: ['copy:html'],
+                options: {
+                    livereload: true
+                }
+            }
+        },
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src: [
+                        'dist/app/**/*.js',
+                        'dist/app/**/*.html',
+                        'dist/app/**/*.css'
+                    ]
+                },
+                options: {
+                    watchTask: true,
+                    server: {
+                        baseDir: './dist'
+                    },
+                    port: 3000
                 }
             }
         }
@@ -66,7 +109,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-http');
 
-    grunt.registerTask('all', 'Exécution de toutes les tâches', [ 'clean', 'copy', 'useminPrepare:dev', 'concat', 'uglify', 'usemin:dev' ])
+    grunt.registerTask('all', 'Exécution de toutes les tâches', [ 'clean', 'copy', 'useminPrepare:dev', 'concat', 'uglify', 'usemin:dev', 'browserSync:dev', 'watch' ])
 };
