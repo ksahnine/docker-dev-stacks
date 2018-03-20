@@ -11,7 +11,7 @@ storeApp.controller('StoreController', ['$log', '$location', 'StoreService', fun
       * @param {Object} article - Nouvel article
       */
     this.ajouter = function () {
-        StoreService.add(self.article).then( function() {
+        StoreService.add(self.article).then( function(data) {
             // Aquittement
             self.articles.push(data);
         })

@@ -15,6 +15,7 @@
                                     <th>ID</th>
                                     <th>Titre</th>
                                     <th>Description</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -22,10 +23,15 @@
                                     <th>{{article.id}}</th>
                                     <td>{{article.title}}</td>
                                     <td>{{article.description}}</td>
+                                    <td>
+                                        <a ng-click="storeCtrl.supprimer(article.id)" class="btn btn-sm btn-danger">
+                                            <i class="glyphicon glyphicon-trash"></i> Supprimer
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <ng-form ng-submit="storeCtrl.ajouter()">
+                        <form ng-submit="storeCtrl.ajouter()">
                             <legend>Ajouter un nouvel article</legend>
                             <div class="form-group row">
                                 <label>Titre</label>
@@ -38,7 +44,7 @@
                             <div class="form-group row pull-right">
                                 <button type="submit" class="btn btn-primary">Ajouter</button>
                             </div>
-                        </ng-form>
+                        </form>
                     </div>
                 </uib-tab>
             </uib-tabset>

@@ -9,7 +9,7 @@ storeApp.factory("StoreService", [ "$http", "$log", function ($http, $log) {
                         });
         },
         add: function (article) {
-            return $http.post('/api/store/articles')
+            return $http.post('/api/store/articles', article)
                         .then(function (r) {
                             return r.data;
                         }, function (error) {
