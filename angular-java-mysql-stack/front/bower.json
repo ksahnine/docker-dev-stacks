@@ -1,0 +1,31 @@
+{
+  "name": "front-demo",
+  "version": "1.0.0",
+  "description": "IHM AngularJS démo",
+  "keywords": [
+    "docker",
+    "angularjs"
+  ],
+  "authors": [
+    "KS"
+  ],
+  "license": "MIT",
+  "homepage": "http://blog.inovia-conseil.fr/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.6.9",
+    "angular-ui-router": "1.0.15",
+    "angular-bootstrap": "1.3.3",
+    "bootstrap": "3.3.7",
+    "lodash": "4.16.4"
+  },
+  "resolutions": {
+    "angular": "1.6.9"
+  }
+}
