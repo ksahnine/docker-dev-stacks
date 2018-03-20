@@ -1,7 +1,7 @@
 storeApp.factory("StoreService", [ "$http", "$log", function ($http, $log) {
     var storeService = {
         list: function () {
-            return $http.get('/store/articles')
+            return $http.get('/api/store/articles')
                         .then(function (r) {
                             return r.data;
                         }, function (error) {
@@ -9,7 +9,7 @@ storeApp.factory("StoreService", [ "$http", "$log", function ($http, $log) {
                         });
         },
         add: function (article) {
-            return $http.post('/store/articles')
+            return $http.post('/api/store/articles')
                         .then(function (r) {
                             return r.data;
                         }, function (error) {

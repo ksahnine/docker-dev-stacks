@@ -1,6 +1,6 @@
 storeApp.controller('StoreController', ['$log', '$location', 'StoreService', function ($log, $location, StoreService) {
     var self = this;
-    this.articles = [];
+    self.articles = [];
     StoreService.list().then( function (data) {
         self.articles = data;
     });
@@ -10,8 +10,11 @@ storeApp.controller('StoreController', ['$log', '$location', 'StoreService', fun
       * @desc Ajouter un article
       * @param {Object} article - Nouvel article
       */
-    this.ajouter = function (article) {
-        StoreService.add(article);
+    this.ajouter = function () {
+        StoreService.add(self.article).then( function() {
+            // Aquittement
+            self.articles.push(data);
+        })
     };
 
     /**
