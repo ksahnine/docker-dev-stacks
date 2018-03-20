@@ -15,6 +15,14 @@ storeApp.factory("StoreService", [ "$http", "$log", function ($http, $log) {
                         }, function (error) {
                             $log.error("Erreur de creation : " + error);
                         });
+        },
+        delete: function (articleId) {
+            return $http.delete('/api/store/articles/' + articleId)
+                        .then(function (r) {
+                            return r.data;
+                        }, function (error) {
+                            $log.error("Erreur de suppression : " + error);
+                        });
         }
     }
     return storeService;

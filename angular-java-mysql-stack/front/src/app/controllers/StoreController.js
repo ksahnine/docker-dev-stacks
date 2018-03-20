@@ -1,19 +1,16 @@
 storeApp.controller('StoreController', ['$log', '$location', 'StoreService', function ($log, $location, StoreService) {
     var self = this;
     self.articles = [];
-    StoreService.list().then( function (data) {
-        self.articles = data;
-    });
 
     /**
       * @name ajouter
       * @desc Ajouter un article
       * @param {Object} article - Nouvel article
       */
-    this.ajouter = function () {
+    self.ajouter = function () {
         StoreService.add(self.article).then( function(data) {
             // Aquittement
-            self.articles.push(data);
+            self.list();
         })
     };
 
@@ -22,10 +19,23 @@ storeApp.controller('StoreController', ['$log', '$location', 'StoreService', fun
       * @desc Suppression d'un article
       * @param {Integer} articleId - ID article
       */
-    this.supprimer = function (articleId) {
+    self.supprimer = function (articleId) {
         StoreService.delete(articleId).then( function (data) {
+            self.list();
+        });
+    };
+
+    /**
+      * @name list
+      * @desc Liste de tous les articles
+      */
+    self.list = function () {
+        StoreService.list().then( function (data) {
             self.articles = data;
         });
     };
+
+    // init
+    self.list();
 
 }]);
