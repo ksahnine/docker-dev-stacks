@@ -29,8 +29,8 @@ services:
         container_name: api
         volumes:
             - "./back/target:/opt/payara/deployments"
-        ports:
-            - "8080:8080"
+        #ports:
+        #    - "8080:8080"
         command: java -jar /opt/payara/payara-micro.jar --deploymentDir /opt/payara/deployments
         restart: always
         env_file:
