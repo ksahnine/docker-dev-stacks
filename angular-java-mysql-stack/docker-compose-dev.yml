@@ -1,0 +1,69 @@
+version: '3'
+services:
+
+    web:
+        image: nginx
+        container_name: web-1
+        volumes:
+            - ./front/dist:/usr/share/nginx/html
+            - ./front/conf/nginx.dev.conf:/etc/nginx/nginx.conf
+        ports:
+            - "80:80"
+        depends_on:
+            - angular
+        networks:
+            - app-network
+
+    angular:
+        image: digitallyseamless/nodejs-bower-grunt:6
+        container_name: angular
+        build: .
+        working_dir: /usr/src/app
+        volumes:
+            - "./front:/usr/src/app"
+        ports:
+            - "3000:3000"
+        privileged: true
+        command: bash -c "npm install && bower --allow-root install && grunt all"
+        depends_on:
+            - api
+        networks:
+            - app-network
+
+    api:
+        image: payara/micro
+        container_name: api
+        volumes:
+            - "./back/target:/opt/payara/deployments"
+        ports:
+            - "8080:8080"
+        command: java -jar /opt/payara/payara-micro.jar --deploymentDir /opt/payara/deployments
+        restart: always
+        env_file:
+            - ".env"
+        depends_on:
+            - mysqldb
+        networks:
+            - app-network
+
+    mysqldb:
+        image: mysql:5.7
+        container_name: ${MYSQL_HOST}
+        restart: always
+        env_file:
+            - ".env"
+        environment:
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        ports:
+            - "3306:3306"
+        volumes:
+            - "./back/data/db/mysql:/var/lib/mysql"
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
