@@ -14,7 +14,7 @@ export class AppComponent {
   article = new Article();
 
   constructor(private http: Http) {
-    //this.articles = [];
+    //this.articles = ELEMENT_DATA;
     this.list();
   }
 
@@ -25,6 +25,11 @@ export class AppComponent {
   add() {
     this.http.post('/api/store/articles', this.article).subscribe(ack => this.list());    
   }
+
+  delete(articleId) {
+    this.http.delete(`/api/store/articles/${articleId}`).subscribe(ack => this.list());    
+  }
+
 }
 
 export class Article {
@@ -36,11 +41,3 @@ export class Article {
   description: string;
   available: boolean;
 }
-
-const ELEMENT_DATA: Article[] = [
-  {id: 1, title: 'Hydrogen', description: 'descr', available: true},
-  {id: 2, title: 'Hydrogen', description: 'descr', available: true},
-  {id: 3, title: 'Hydrogen', description: 'descr', available: true},
-  {id: 4, title: 'Hydrogen', description: 'descr', available: true},
-  {id: 5, title: 'Hydrogen', description: 'descr', available: true}
-];

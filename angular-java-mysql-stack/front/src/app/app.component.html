@@ -32,13 +32,15 @@
 
       <ng-container matColumnDef="available">
         <mat-header-cell *matHeaderCellDef> Disponibilité </mat-header-cell>
-        <mat-cell *matCellDef="let a"> <mat-slide-toggle [(ngValue)]="a.available"></mat-slide-toggle> </mat-cell>
+        <mat-cell *matCellDef="let a"> 
+          <mat-slide-toggle [(ngModel)]="a.available" color="primary"></mat-slide-toggle> 
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
-        <mat-cell *matCellDef="let a"> 
-            <button mat-button >
+        <mat-cell *matCellDef="let a">
+            <button mat-button (click)="delete(a.id)">
                 <mat-icon aria-label="Supprimer l'article">delete</mat-icon>
             </button>        
         </mat-cell>
