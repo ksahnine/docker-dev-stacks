@@ -22,6 +22,7 @@ public class Article {
     private String id;
     private String title;
     private String description;
+    private Boolean available;
 
     public Article() {}
 
@@ -47,6 +48,13 @@ public class Article {
     }
 
     /**
+     * @return the available
+     */
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    /**
      * @param id the id to set
      */
     public void setId(String id) {
@@ -65,5 +73,12 @@ public class Article {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * @param available the available to set
+     */
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }
