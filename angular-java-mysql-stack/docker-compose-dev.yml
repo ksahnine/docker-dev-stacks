@@ -5,7 +5,7 @@ services:
         image: nginx
         container_name: web-1
         volumes:
-            - ./front/dist:/usr/share/nginx/html
+            #- ./front/dist:/usr/share/nginx/html
             - ./front/conf/nginx.dev.conf:/etc/nginx/nginx.conf
         ports:
             - "80:80"
@@ -17,7 +17,7 @@ services:
     angular:
         image: trion/ng-cli:1.7.3
         container_name: angular
-        build: .
+        #build: .
         working_dir: /app
         volumes:
             - "./front:/app"
