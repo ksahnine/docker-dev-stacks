@@ -30,9 +30,18 @@
         <mat-cell *matCellDef="let a"> {{a.description}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="stock">
+      <ng-container matColumnDef="available">
         <mat-header-cell *matHeaderCellDef> Disponibilité </mat-header-cell>
-        <mat-cell *matCellDef="let a"> {{a.stock}} </mat-cell>
+        <mat-cell *matCellDef="let a"> <mat-slide-toggle [(ngValue)]="a.available"></mat-slide-toggle> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+        <mat-cell *matCellDef="let a"> 
+            <button mat-button >
+                <mat-icon aria-label="Supprimer l'article">delete</mat-icon>
+            </button>        
+        </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -53,7 +62,7 @@
       <mat-form-field>
         <textarea matInput [(ngModel)]="article.description" placeholder="Description de l'article"></textarea>
       </mat-form-field>
-      <mat-slide-toggle [(ngModel)]="article.stock">Article en stock</mat-slide-toggle>
+      <mat-slide-toggle [(ngModel)]="article.available">Article en stock</mat-slide-toggle>
     </div>
   </mat-card-content>
   <mat-card-actions align="right">

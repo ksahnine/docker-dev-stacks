@@ -15,16 +15,15 @@ services:
             - app-network
 
     angular:
-        image: digitallyseamless/nodejs-bower-grunt:6
+        image: trion/ng-cli:1.7.3
         container_name: angular
         build: .
-        working_dir: /usr/src/app
+        working_dir: /app
         volumes:
-            - "./front:/usr/src/app"
+            - "./front:/app"
         ports:
-            - "3000:3000"
-        privileged: true
-        command: bash -c "npm install && bower --allow-root install && grunt all"
+            - "4200:4200"
+        command: bash -c "npm install && ng serve -H 0.0.0.0 --disable-host-check"
         depends_on:
             - api
         networks:

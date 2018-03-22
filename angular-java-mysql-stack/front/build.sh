@@ -1,6 +1,6 @@
-docker run --privileged=true -it \
--p 3000:3000 \
--w /usr/src/app \
--v `pwd`:/usr/src/app:rw \
-digitallyseamless/nodejs-bower-grunt:6 bash -c "npm install && bower --allow-root install && grunt all"
+docker run -it \
+-p 4200:4200 \
+-w /app \
+-v `pwd`:/app:rw \
+trion/ng-cli:1.7.3 bash -c "npm install && ng serve -H 0.0.0.0"
 
