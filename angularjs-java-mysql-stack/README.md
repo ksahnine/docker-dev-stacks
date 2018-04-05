@@ -3,14 +3,12 @@
 Pile technique dockerisée constituée des composants suivants :
 
 - frontend :
-  - serveur web nginx
-  - application AngularJS (1.6)
+  - serveur web nginx (image Docker `nginx`)
+  - application AngularJS (1.6) construite avec une chaîne de construction node, Bower, Grunt (image Docker `digitallyseamless/nodejs-bower-grunt`)
 - backend :
   - application Java EE 7 de type API REST (XML/JSON)
-  - serveur d'application Payara micro
-  - base de données MySQL 5.7
+  - serveur d'application Payara micro (image Docker `payara/micro`)
+  - base de données MySQL 5.7 (image Docker `mysql`)
 
-L'infrastructure est provisionnée via `docker-compose`.
-
-Work in progress
+La pile technique est provisionnée via `docker-compose`.
 
